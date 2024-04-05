@@ -7,8 +7,9 @@ I have always been envious of the dynamic calendar icon in Wolai, but unfortunat
 Due to my weak front-end skills and lack of familiarity with Obsidian's API calls, I managed to piece things together successfully, and I have to admit, I am quite impressed with myself.
 
 ## ✨ Interface Preview
+![17123494514451712349450900.png](https://fastly.jsdelivr.net/gh/Achuan-2/PicBed@pic/assets/17123494514451712349450900.png)
 
-![17123430204421712343019600.png](https://fastly.jsdelivr.net/gh/Achuan-2/PicBed@pic/assets/17123430204421712343019600.png)
+![17123494224531712349422113.png](https://fastly.jsdelivr.net/gh/Achuan-2/PicBed@pic/assets/17123494224531712349422113.png)
 
 ## 🐯 Main Features
 
@@ -36,4 +37,4 @@ Due to my weak front-end skills and lack of familiarity with Obsidian's API call
 
 ## ☎️ Feedback
 
-Feel free to raise an issue on [GitHub](https://github.com/Achuan-2/siyuan-themes-tsundoku) or contact me via email.
+Feel free to raise an issue on [GitHub](https://github.com/Achuan-2/siyuan-widget-dayCounter) or contact me via email.

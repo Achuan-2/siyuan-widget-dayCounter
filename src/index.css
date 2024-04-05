@@ -46,7 +46,7 @@ body {
 #calendar-event {
     text-align: center;
     /* 使用视口宽度的百分比作为字体大小 */
-    font-size: 9vh;
+    font-size: 12vh;
     white-space: pre-line;
 }
 
