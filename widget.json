@@ -1,0 +1,25 @@
+{
+    "name": "widget-day-counter",
+    "author": "Achuan-2",
+    "url": "https://github.com/Achuan-2/day-counter",
+    "version": "0.0.1",
+    "minAppVersion": "2.8.8",
+    "displayName": {
+        "default": "Day Counter",
+        "zh_CN": "倒数日"
+    },
+    "description": {
+        "default": "Dynamically calculating countdown and countup days",
+        "zh_CN": "动态计算倒数/正数日，适合项目截止日期跟踪、纪念日管理等场景"
+    },
+    "readme": {
+        "default": "README.md",
+        "zh_CN": "README_zh_CN.md"
+    },
+    "funding": {
+        "openCollective": "",
+        "patreon": "",
+        "github": "",
+        "custom": ["https://afdian.net/a/achuan-2"]
+    }
+}

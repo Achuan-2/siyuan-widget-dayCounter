@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>动态日历图标</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./src/jquery-3.6.0.min.js"></script>
+    <script src="./src/Calendar.js"></script>
+    <link href="src/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="calendar-widget">
+        <button class="settings-button">☰</button>
+        <div class="settings-menu" id="calendar-options">
+            <div class="settings-row">
+                <label for="selected-color">配色:</label>
+                <input type="color" id="selected-color" value="#CF5659"> <!-- 默认颜色设置为原始的红色 -->
+            </div>
+            <div class="settings-row">
+                <label for="target-date">日期:</label>
+                <input type="date" id="target-date">
+            </div>
+            <div class="settings-row">
+                <label for="event-name">事件:</label>
+                <input type="text" id="event-name" value="事件">
+            </div>
+
+        </div>
+        <div id="calendar-top">
+            <!-- 日期将会在这里显示 -->
+            <div id="calendar-date"></div>
+            <div id="calendar-event"></div>
+        </div>
+        <div id="calendar-info">
+            <div id="count-info"></div>
+        </div>
+    </div>
+
+    <script type="module">
+
+        import {
+            getCurrentWidgetId,
+            getblockAttrAPI,
+            addblockAttrAPI,
+        } from './src/API.js';
+
+
+
+        async function updateCalendarAndSave() {
+            // 更新日历界面
+            updateCalendar()
+
+            // 更新完界面自动保存数据
+            await delay(500); // 延迟，保证能写入
+            await saveSettings();
+        }
+
+
+
+
+        async function saveSettings() {
+            let data = {};
+            //获取用户设置，写入data
+            //注意判空，为空写null
+            //为空时保留null（因为为空时不显示null）
+            data["custom-selectedcolor"] = $("#selected-color").val();
+            data["custom-targetdate"] = $("#target-date").val();
+            data["custom-eventname"] = $("#event-name").val();
+
+            for (let attr in data) {
+                if (data[attr] == "") data[attr] = "null";
+            }
+            //保存属性
+            console.log(data)
+            let response = await addblockAttrAPI(data, thisWidgetId);
+            if (response != 0) {
+                console.log("倒数日写入失败writeAttrFailed");
+            }
+
+
+        }
+
+        async function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        // 获取挂件ID
+
+        const thisWidgetId = getCurrentWidgetId();
+
+        window.onload = async function () {
+            // 设置iframe样式
+            if (window.frameElement.style.width === '') {
+                window.frameElement.style.width = '340px';
+            }
+            if (window.frameElement.style.height === '') {
+                window.frameElement.style.height = '283px';
+            }
+            window.frameElement.style.border = 'none';
+            window.frameElement.style.backgroundColor = 'transparent';
+
+            // 等待
+            await delay(500);
+            //  获取块属性，进行挂件初始化
+            let response = await getblockAttrAPI(thisWidgetId);
+            let block_atrr = response.data;
+            // console.log(block_atrr)
+            if ("custom-selectedcolor" in block_atrr) {
+                document.getElementById("selected-color").value = block_atrr["custom-selectedcolor"];
+            }
+            if ("custom-targetdate" in block_atrr) {
+                document.getElementById("target-date").value = block_atrr["custom-targetdate"];
+                updateDate(block_atrr["custom-targetdate"]);
+
+            } else {
+                const today = getToday();
+                document.getElementById("target-date").valueAsDate = today;
+                updateDate(today);
+            }
+
+
+            if ("custom-eventname" in block_atrr) {
+                if (block_atrr["custom-eventname"] != 'null') {
+                    document.getElementById("event-name").value = block_atrr["custom-eventname"];
+                }
+                else {
+                    document.getElementById("event-name").value = '';
+                }
+
+            }
+
+
+            // 更新界面
+            updateCalendar();
+
+            // 自动更新结果
+            document.getElementById("target-date").addEventListener("change", updateCalendarAndSave);
+            document.getElementById("event-name").addEventListener("input", updateCalendarAndSave);
+            document.getElementById("selected-color").addEventListener("change", updateCalendarAndSave);
+
+            // 防止点击设置菜单时关闭
+            document.getElementById("calendar-options").addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+
+            // 设置按钮也防止事件冒泡
+            document.querySelector(".settings-button").addEventListener("click", function (event) {
+                event.stopPropagation();
+                toggleSettingsMenu();
+            });
+            // 点击页面其他位置关闭设置菜单
+            document.body.addEventListener("click", function () {
+                const settingsMenu = document.getElementById("calendar-options");
+                if (settingsMenu.style.display === 'flex') {
+                    settingsMenu.style.display = 'none';
+                }
+            });
+            // 当用户点击浏览器窗口之外的任何地方，或者切换到另一个程序时，window 对象会触发 blur 事件。隐藏菜单
+            window.addEventListener('blur', function () {
+                const settingsMenu = document.getElementById("calendar-options");
+                if (settingsMenu.style.display === 'flex') {
+                    settingsMenu.style.display = 'none';
+                }
+            });
+
+
+
+        };
+
+    </script>
+</body>
+
+</html>

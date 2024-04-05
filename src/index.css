@@ -1,0 +1,115 @@
+html,
+body {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    /* width: 100%; */
+    height: 100%;
+    background-color: transparent;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#calendar-widget {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    height: 99%;
+    /* max-width: 600px; */
+    /* 限制最大宽度 */
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+#calendar-top {
+    height: 50%;
+    font-size: 4vh;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
+    color: #fff;
+    background-color: #cf5659;
+    white-space: pre-line;
+    text-align: left;
+}
+
+#calendar-date {
+    font-size: 12vh;
+    /* 使用视口宽度的百分比作为字体大小 */
+}
+
+#calendar-event {
+    text-align: center;
+    /* 使用视口宽度的百分比作为字体大小 */
+    font-size: 9vh;
+    white-space: pre-line;
+}
+
+#count-info {
+    /* 使用视口宽度的百分比作为字体大小 */
+    font-size: 19vh;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.settings-menu {
+    display: none;
+    flex-wrap: wrap;
+    /* 允许内容换行 */
+    align-items: center;
+    /* 垂直居中对齐 */
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 5px #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 100;
+    font-size: 10px;
+}
+
+.settings-row {
+    display: flex;
+    /* 垂直居中对齐 */
+    align-items: center;
+}
+
+.settings-menu label,
+.settings-menu input {
+    margin-right: 10px;
+    /* 为元素添加一些间距 */
+}
+
+.settings-menu label {
+    margin-left: 5px;
+}
+
+.settings-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10;
+    color: #f3f1f1;
+}
+
+#selected-color {
+    height: 19px;
+    width: 22px;
+    padding: 0px;
+    border-width: 0px;
+}
+
+#target-date,
+#event-name {
+    font-size: 10px;
+}
