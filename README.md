@@ -1,3 +1,5 @@
+[中文](README_zh_CN.md.md)
+
 ## 💌 Origin
 
 I have always been envious of the dynamic calendar icon in Wolai, but unfortunately, there are no related widgets in Obsidian. With the help of GPT, I developed a countdown widget.
