@@ -52,7 +52,7 @@ body {
 
 #count-info {
     /* 使用视口宽度的百分比作为字体大小 */
-    font-size: 19vh;
+    font-size: 17vh;
     padding-top: 5vh;
     padding-bottom: 5vh;
 }
@@ -91,6 +91,7 @@ body {
 }
 
 .settings-button {
+    opacity: 0;
     position: absolute;
     right: 10px;
     top: 10px;
@@ -100,6 +101,9 @@ body {
     font-size: 20px;
     z-index: 10;
     color: #f3f1f1;
+}
+#calendar-widget:hover .settings-button {
+    opacity: 1;
 }
 
 #selected-color {

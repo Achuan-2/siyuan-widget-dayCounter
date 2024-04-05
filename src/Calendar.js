@@ -1,27 +1,24 @@
 function updateCalendar() {
-        // 更新日历界面
-        const targetDateInput = document.getElementById('target-date');
-        const targetDate = new Date(targetDateInput.value);
-        const eventNameInput = document.getElementById('event-name');
-        const eventName = eventNameInput.value.trim(); // 获取事件名称并去除两端空格
-        const backgroundColorInput = document.getElementById('selected-color'); // 获取背景颜色选择器
-        const backgroundColor = backgroundColorInput.value; // 获取选择的背景颜色值
-        if (isNaN(targetDate.getTime())) {
-            alert('请输入有效的日期。');
-            return;
-        }
+    // 更新日历界面
+    const targetDateInput = document.getElementById('target-date');
+    const targetDate = new Date(targetDateInput.value);
+    const eventNameInput = document.getElementById('event-name');
+    const eventName = eventNameInput.value.trim(); // 获取事件名称并去除两端空格
+    const backgroundColorInput = document.getElementById('selected-color'); // 获取背景颜色选择器
+    const backgroundColor = backgroundColorInput.value; // 获取选择的背景颜色值
+    if (isNaN(targetDate.getTime())) {
+        alert('请输入有效的日期。');
+        return;
+    }
 
-        updateDate(targetDate);
-        // 显示事件
-        document.getElementById('calendar-event').textContent = eventName;
-    
+    updateDate(targetDate);
+    // 显示事件
+    document.getElementById('calendar-event').textContent = eventName;
 
-        const daysDiff = calculateCount(targetDate);
-        updateCountInfo(daysDiff, eventName);
-        document.getElementById('calendar-top').style = `background-color: ${backgroundColor};`;
+    const daysDiff = calculateCount(targetDate);
+    updateCountInfo(daysDiff, eventName);
+    document.getElementById('calendar-top').style = `background-color: ${backgroundColor};`;
 }
-
-
 
 function getToday() {
     return new Date();
@@ -40,7 +37,7 @@ function updateDate(date) {
     const { day, month, year } = formatDate(date_object);
     const weekday = getWeekday(date_object);
 
-    calendarDate.innerHTML = `<span style="padding-left: 15px;">${year}.${month}.${day} ${weekday}</span>`;
+    calendarDate.innerHTML = `<span style="padding-left: 0.5vw;">${year}.${month}.${day} ${weekday}</span>`;
 }
 
 function calculateCount(targetDate) {
