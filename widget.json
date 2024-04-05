@@ -1,8 +1,8 @@
 {
-    "name": "widget-day-counter",
+    "name": "DayCounter",
     "author": "Achuan-2",
-    "url": "https://github.com/Achuan-2/day-counter",
-    "version": "0.0.1",
+    "url": "https://github.com/Achuan-2/siyuan-widget-dayCounter",
+    "version": "0.0.2",
     "minAppVersion": "2.8.8",
     "displayName": {
         "default": "Day Counter",
