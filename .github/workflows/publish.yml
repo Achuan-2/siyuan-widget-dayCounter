@@ -1,46 +1,32 @@
-name: Create Release
+name: CI
 
 on:
   push:
-    tags:
+    tags: 
       - 'v*'
-
-permissions:
-  contents: write
 
 jobs:
   build:
+  
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Generate Package.zip
-        run: find . -not -path '*/\.*' -print | xargs zip package.zip
-
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      
+      - name : jq theme.json
+        run: |
+          cat theme.json | jq .version
+          
+      - name: package
+        run: |
+          find . -not -path '*/\.*' -type f -print | zip package.zip -@
+      
+      - uses: ncipollo/release-action@v1
         with:
-          python-version: '3.8'
-
-      - name: Get CHANGELOGS
-        run: python release.py
-
-      - name: Pre Release
-        uses: softprops/action-gh-release@v1
-        if: contains(github.ref, 'beta') || contains(github.ref, 'alpha') 
-        with:
-          body_path: ./result.txt
-          files: package.zip
-          prerelease: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: ${{ ! contains(github.ref, 'beta') && ! contains(github.ref, 'alpha') }}
-        with:
-          body_path: ./result.txt
-          files: package.zip
-          prerelease: false
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          artifacts: "package.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
