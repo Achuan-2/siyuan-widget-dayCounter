@@ -73,7 +73,7 @@
                 if (data[attr] == "") data[attr] = "null";
             }
             //保存属性
-            console.log(data)
+            // console.log(data)
             let response = await addblockAttrAPI(data, thisWidgetId);
             if (response != 0) {
                 console.log("倒数日写入失败writeAttrFailed");
