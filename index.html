@@ -165,8 +165,9 @@
             document.getElementById("target-date").addEventListener("change", updateCalendarAndSave);
             document.getElementById("event-name").addEventListener("input", updateCalendarAndSave);
             let selectColorInput = document.getElementById("selected-color");
-            selectColorInput.addEventListener("change", updateCalendarAndSave);
             let hexColor = document.getElementById("hexColor");
+            selectColorInput.addEventListener("input", updateCalendar); // 及时更新配色
+            selectColorInput.addEventListener("change", updateCalendarAndSave);
             hexColor.addEventListener("change", function () {
                 var hexValue = hexColor.value;
                 // 简单的正则表达式来验证输入是否为有效的HEX颜色代码
