@@ -19,12 +19,23 @@
                 <input type="color" id="selected-color" value="#CF5659"> <!-- 默认颜色设置为原始的红色 -->
             </div>
             <div class="settings-row">
-                <label for="target-date">日期:</label>
+                <label for="begin-date">起始日期:</label>
+                <input type="date" id="begin-date">
+            </div>
+            <div class="settings-row">
+                <label for="target-date">结束日期:</label>
                 <input type="date" id="target-date">
             </div>
             <div class="settings-row">
                 <label for="event-name">事件:</label>
                 <input type="text" id="event-name" value="事件">
+            </div>
+            <div class="settings-row">
+                <label for="selected-style">样式:</label>
+                <select id="style">
+                    <option value="mark">default</option>
+                    <option value="progress">progress</option>
+                </select>
             </div>
 
         </div>
@@ -68,6 +79,8 @@
             data["custom-selectedcolor"] = $("#selected-color").val();
             data["custom-targetdate"] = $("#target-date").val();
             data["custom-eventname"] = $("#event-name").val();
+            data["custom-style"] = $("#style").val();
+            data["custom-begindate"] = $("#begin-date").val();
 
             for (let attr in data) {
                 if (data[attr] == "") data[attr] = "null";
@@ -109,6 +122,15 @@
             if ("custom-selectedcolor" in block_atrr) {
                 document.getElementById("selected-color").value = block_atrr["custom-selectedcolor"];
             }
+            if ("custom-style" in block_atrr) {
+                document.getElementById("style").value = block_atrr["custom-style"];
+            }
+            if ("custom-begindate" in block_atrr) {
+                document.getElementById("begin-date").value = block_atrr["custom-begindate"];
+            } else {
+                const today = getToday();
+                document.getElementById("begin-date").valueAsDate = today;
+            }
             if ("custom-targetdate" in block_atrr) {
                 document.getElementById("target-date").value = block_atrr["custom-targetdate"];
                 updateDate(block_atrr["custom-targetdate"]);
@@ -138,6 +160,8 @@
             document.getElementById("target-date").addEventListener("change", updateCalendarAndSave);
             document.getElementById("event-name").addEventListener("input", updateCalendarAndSave);
             document.getElementById("selected-color").addEventListener("change", updateCalendarAndSave);
+            document.getElementById("style").addEventListener("change", updateCalendarAndSave);
+            document.getElementById("begin-date").addEventListener("change", updateCalendarAndSave);
 
             // 防止点击设置菜单时关闭
             document.getElementById("calendar-options").addEventListener("click", function (event) {
