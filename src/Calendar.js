@@ -7,7 +7,7 @@ function updateCalendar() {
     const backgroundColorInput = document.getElementById('selected-color'); // 获取背景颜色选择器
     const backgroundColor = backgroundColorInput.value; // 获取选择的背景颜色值
     if (isNaN(targetDate.getTime())) {
-        alert('请输入有效的日期。');
+        //    console.log('请输入有效的日期。');
         return;
     }
 
