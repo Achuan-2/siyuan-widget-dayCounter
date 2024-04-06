@@ -20,7 +20,7 @@
             </div>
             <div class="settings-row">
                 <label for="target-date">日期:</label>
-                <input type="date" id="target-date">
+                <input type="date" id="target-date" value="2024-01-01">
             </div>
             <div class="settings-row">
                 <label for="event-name">事件:</label>
@@ -81,7 +81,33 @@
 
 
         }
+        async function getBlockAttributesWithRetry(widgetId, maxRetries = 4, interval = 500) {
+            // 尝试获取块属性
+            let response = await getblockAttrAPI(widgetId);
 
+            // 如果获取到的数据不是空对象，直接返回结果
+            if (Object.keys(response.data).length > 0) {
+                return response;
+            }
+
+            // 如果重试次数用完仍然没有获取到数据，抛出错误
+            if (maxRetries <= 0) {
+                throw new Error('无法获取块属性，超出最大重试次数');
+            }
+
+            // 等待一段时间后再次尝试
+            return new Promise((resolve, reject) => {
+                setTimeout(async () => {
+                    try {
+                        // 递归调用，减少重试次数
+                        const result = await getBlockAttributesWithRetry(widgetId, maxRetries - 1, interval);
+                        resolve(result);
+                    } catch (error) {
+                        reject(error);
+                    }
+                }, interval);
+            });
+        }
         async function delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
@@ -100,10 +126,10 @@
             window.frameElement.style.border = 'none';
             window.frameElement.style.backgroundColor = 'transparent';
 
-            // 等待
-            await delay(500);
+
             //  获取块属性，进行挂件初始化
-            let response = await getblockAttrAPI(thisWidgetId);
+            const response = await getBlockAttributesWithRetry(thisWidgetId);
+            // console.log(Object.keys(response.data).length);
             let block_atrr = response.data;
             // console.log(block_atrr)
             if ("custom-selectedcolor" in block_atrr) {
