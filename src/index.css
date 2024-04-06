@@ -114,6 +114,8 @@ body {
 }
 
 #target-date,
+#begin-date,
+#style,
 #event-name {
     font-size: 10px;
 }
