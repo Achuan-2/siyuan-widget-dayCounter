@@ -1,4 +1,4 @@
-[中文](README_zh_CN.md.md)
+[中文](README_zh_CN.md)
 
 ## 💌 Origin
 
