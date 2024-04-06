@@ -15,44 +15,52 @@ body {
 }
 
 #calendar-widget {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ddd;
     border-radius: 10px;
     text-align: center;
-    width: 100%;
+    width: 100%; /* 使用视口宽度的百分比，确保在不同屏幕上宽度自适应 */
     height: 99%;
-    /* max-width: 600px; */
-    /* 限制最大宽度 */
+    /* margin: 5vh auto; 居中显示，同时提供上下边距 */
     font-family: Arial, sans-serif;
-    position: relative;
+    /* white-space: pre-line; */
 }
 
 #calendar-top {
+    /* 允许根据内容自动伸缩 */
+    /* flex: 1;  */
+    flex-grow: 1;
     height: 50%;
     font-size: 4vh;
     font-weight: bold;
     padding: 10px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
     color: #fff;
     background-color: #cf5659;
-    white-space: pre-line;
+    /* white-space: pre-line; */
     text-align: left;
 }
-
 #calendar-date {
-    font-size: 12vh;
+    font-size: 11vw;
     /* 使用视口宽度的百分比作为字体大小 */
 }
 
 #calendar-event {
+    align-items: center;
     text-align: center;
-    /* 使用视口宽度的百分比作为字体大小 */
-    font-size: 12vh;
+    font-size: 11vw;
+    margin-top: 5.5vh;
     white-space: pre-line;
+    /* 以下两行确保内容过多时可以滚动显示 */
+    /* max-height: 100%; 限制最大高度，确保内容超出时可以滚动 */
+    /* overflow-y: auto; 允许垂直滚动 */
 }
 
 #count-info {
     /* 使用视口宽度的百分比作为字体大小 */
-    font-size: 17vh;
+    font-size: 16vw;
     padding-top: 5vh;
     padding-bottom: 5vh;
 }
