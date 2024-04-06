@@ -93,11 +93,10 @@ function updateCountInfo(daysDiff, eventName) {
             <div>${
               today >= targetDate
                 ? `已过 ${Math.abs(daysToTarget)} 天`
-                : `${
-                    (daysFromBegin / (daysToTarget + daysFromBegin)).toFixed(
-                      4
-                    ) * 100
-                  }%`
+                : `${(
+                    (daysFromBegin / (daysToTarget + daysFromBegin)) *
+                    100
+                  ).toFixed(2)}%`
             }</div>
             <div class="progress-bar">
             <div class="progress" id="myProgress"></div>
