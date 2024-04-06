@@ -50,7 +50,7 @@ body {
 #calendar-event {
     text-align: center;
     font-size: 11vw;
-    margin-top: 6vh;
+    margin-top: 8.5vh;
     white-space: pre-line;
     /* 以下两行确保内容过多时可以滚动显示 */
     /* max-height: 100%; 限制最大高度，确保内容超出时可以滚动 */
@@ -119,7 +119,10 @@ body {
     padding: 0px;
     border-width: 0px;
 }
-
+#hexColor{
+    width: 50px;
+}
+#hexColor,
 #target-date,
 #event-name {
     font-size: 10px;
