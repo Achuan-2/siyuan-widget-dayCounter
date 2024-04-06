@@ -6,6 +6,7 @@ function updateCalendar() {
     const eventName = eventNameInput.value.trim(); // 获取事件名称并去除两端空格
     const backgroundColorInput = document.getElementById('selected-color'); // 获取背景颜色选择器
     const backgroundColor = backgroundColorInput.value; // 获取选择的背景颜色值
+    const hexColorInput = document.getElementById('hexColor'); // 获取颜色值并去除两端空格
     if (isNaN(targetDate.getTime())) {
         //    console.log('请输入有效的日期。');
         return;
@@ -18,6 +19,7 @@ function updateCalendar() {
     const daysDiff = calculateCount(targetDate);
     updateCountInfo(daysDiff, eventName);
     document.getElementById('calendar-top').style = `background-color: ${backgroundColor};`;
+    hexColorInput.value = backgroundColor;
 }
 
 function getToday() {

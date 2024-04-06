@@ -15,16 +15,17 @@
         <button class="settings-button">☰</button>
         <div class="settings-menu" id="calendar-options">
             <div class="settings-row">
-                <label for="selected-color">配色:</label>
+                <label for="selected-color">配色</label>
                 <input type="color" id="selected-color" value="#CF5659"> <!-- 默认颜色设置为原始的红色 -->
+                <input type="text" id="hexColor" placeholder="#CF5659" value="#CF5659" spellcheck="false">
             </div>
             <div class="settings-row">
-                <label for="target-date">日期:</label>
+                <label for="target-date">日期</label>
                 <input type="date" id="target-date" value="2024-01-01">
             </div>
             <div class="settings-row">
-                <label for="event-name">事件:</label>
-                <textarea id="event-name" rows="1" cols="20">事件</textarea>
+                <label for="event-name">事件</label>
+                <textarea id="event-name" rows="1" cols="10" spellcheck="false">事件</textarea>
             </div>
 
         </div>
@@ -163,8 +164,23 @@
             // 自动更新结果
             document.getElementById("target-date").addEventListener("change", updateCalendarAndSave);
             document.getElementById("event-name").addEventListener("input", updateCalendarAndSave);
-            document.getElementById("selected-color").addEventListener("change", updateCalendarAndSave);
-
+            let selectColorInput = document.getElementById("selected-color");
+            selectColorInput.addEventListener("change", updateCalendarAndSave);
+            let hexColor = document.getElementById("hexColor");
+            hexColor.addEventListener("change", function () {
+                var hexValue = hexColor.value;
+                // 简单的正则表达式来验证输入是否为有效的HEX颜色代码
+                if (/^#([0-9a-f]{3}){1,2}$/i.test(hexValue)) {
+                    if (/^#([0-9A-F]{3})$/i.test(hexValue)) {
+                        selectColorInput.value = '#' + hexValue[1] + hexValue[1] + hexValue[2] + hexValue[2] + hexValue[3] + hexValue[3];
+                    } else {
+                        selectColorInput.value = hexValue;
+                    }
+                    updateCalendarAndSave();
+                } else {
+                    hexColor.value = selectColorInput.value;
+                }
+            }, false);
             // 防止点击设置菜单时关闭
             document.getElementById("calendar-options").addEventListener("click", function (event) {
                 event.stopPropagation();
