@@ -48,10 +48,9 @@ body {
 }
 
 #calendar-event {
-    align-items: center;
     text-align: center;
     font-size: 11vw;
-    margin-top: 5.5vh;
+    margin-top: 6vh;
     white-space: pre-line;
     /* 以下两行确保内容过多时可以滚动显示 */
     /* max-height: 100%; 限制最大高度，确保内容超出时可以滚动 */
