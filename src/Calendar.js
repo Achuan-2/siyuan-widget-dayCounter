@@ -51,9 +51,13 @@ function calculateCount(targetDate) {
 
 function updateCountInfo(daysDiff, eventName) {
     const countInfo = document.getElementById('count-info');
-    if (daysDiff >= 0) {
+    if (daysDiff > 0) {
         countInfo.textContent = `还有 ${daysDiff} 天`;
-    } else {
+    }
+    else if (daysDiff === 0) {
+        countInfo.textContent = `今天`;
+    }
+    else {
         countInfo.textContent = `已过 ${Math.abs(daysDiff)} 天`;
     }
 }
