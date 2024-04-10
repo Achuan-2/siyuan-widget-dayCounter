@@ -87,6 +87,7 @@ body {
     display: flex;
     /* 垂直居中对齐 */
     align-items: center;
+
 }
 
 .settings-menu label,
@@ -124,6 +125,7 @@ body {
 #hexColor {
     width: 50px;
 }
+#cycle-type,
 #hexColor,
 #target-date,
 #event-name {

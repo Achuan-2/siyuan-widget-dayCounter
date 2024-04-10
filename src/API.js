@@ -1,5 +1,41 @@
 let token = '';
 let includeOs = []; //目前没用
+
+
+
+
+export  async function getBlockAttributesWithRetry(widgetId, maxRetries = 4, interval = 500) {
+    // 尝试获取块属性
+    let response = await getblockAttrAPI(widgetId);
+
+    // 如果获取到的数据不是空对象，直接返回结果
+    if (Object.keys(response.data).length > 0) {
+        return response;
+    }
+
+    // 如果重试次数用完仍然没有获取到数据，抛出错误
+    if (maxRetries <= 0) {
+        throw new Error('无法获取块属性，超出最大重试次数');
+    }
+
+    // 等待一段时间后再次尝试
+    return new Promise((resolve, reject) => {
+        setTimeout(async () => {
+            try {
+                // 递归调用，减少重试次数
+                const result = await getBlockAttributesWithRetry(
+                    widgetId,
+                    maxRetries - 1,
+                    interval
+                );
+                resolve(result);
+            } catch (error) {
+                reject(error);
+            }
+        }, interval);
+    });
+}
+
 //向思源api发送请求
 export async function postRequest(data, url) {
     let result;

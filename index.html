@@ -24,8 +24,17 @@
                 <input type="date" id="target-date" value="2024-01-01">
             </div>
             <div class="settings-row">
-                <label for="event-name">事件</label>
-                <textarea id="event-name" rows="1" cols="10" spellcheck="false">事件</textarea>
+                <label for="cycle-type">周期</label>
+                <select id="cycle-type">
+                    <option value="none">无</option>
+                    <option value="year">年</option>
+                    <option value="month">月</option>
+                    <option value="week">周</option>
+                </select>
+                <div class="settings-row">
+                    <label for="event-name">事件</label>
+                    <textarea id="event-name" rows="1" cols="10" spellcheck="false">事件</textarea>
+                </div>
             </div>
 
         </div>
@@ -45,9 +54,29 @@
             getCurrentWidgetId,
             getblockAttrAPI,
             addblockAttrAPI,
+            getBlockAttributesWithRetry,
         } from './src/API.js';
 
-
+        async function saveSettings() {
+            let data = {};
+            //获取用户设置，写入data
+            //注意判空，为空写null
+            //为空时保留null（因为为空时不显示null）
+            data['custom-selectedcolor'] = $('#selected-color').val();
+            data['custom-targetdate'] = $('#target-date').val();
+            data['custom-eventname'] = $('#event-name').val();
+            // 获取用户设置，写入data
+            data['custom-cycle'] = $('#cycle-type').val();
+            for (let attr in data) {
+                if (data[attr] == '') data[attr] = 'null';
+            }
+            //保存属性
+            // console.log(data)
+            let response = await addblockAttrAPI(data, thisWidgetId);
+            if (response != 0) {
+                console.log('倒数日写入失败writeAttrFailed');
+            }
+        }
 
         async function updateCalendarAndSave() {
             // 更新日历界面
@@ -60,55 +89,6 @@
 
 
 
-
-        async function saveSettings() {
-            let data = {};
-            //获取用户设置，写入data
-            //注意判空，为空写null
-            //为空时保留null（因为为空时不显示null）
-            data["custom-selectedcolor"] = $("#selected-color").val();
-            data["custom-targetdate"] = $("#target-date").val();
-            data["custom-eventname"] = $("#event-name").val();
-
-            for (let attr in data) {
-                if (data[attr] == "") data[attr] = "null";
-            }
-            //保存属性
-            // console.log(data)
-            let response = await addblockAttrAPI(data, thisWidgetId);
-            if (response != 0) {
-                console.log("倒数日写入失败writeAttrFailed");
-            }
-
-
-        }
-        async function getBlockAttributesWithRetry(widgetId, maxRetries = 4, interval = 500) {
-            // 尝试获取块属性
-            let response = await getblockAttrAPI(widgetId);
-
-            // 如果获取到的数据不是空对象，直接返回结果
-            if (Object.keys(response.data).length > 0) {
-                return response;
-            }
-
-            // 如果重试次数用完仍然没有获取到数据，抛出错误
-            if (maxRetries <= 0) {
-                throw new Error('无法获取块属性，超出最大重试次数');
-            }
-
-            // 等待一段时间后再次尝试
-            return new Promise((resolve, reject) => {
-                setTimeout(async () => {
-                    try {
-                        // 递归调用，减少重试次数
-                        const result = await getBlockAttributesWithRetry(widgetId, maxRetries - 1, interval);
-                        resolve(result);
-                    } catch (error) {
-                        reject(error);
-                    }
-                }, interval);
-            });
-        }
         async function delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
@@ -146,7 +126,6 @@
                 updateDate(today);
             }
 
-
             if ("custom-eventname" in block_atrr) {
                 if (block_atrr["custom-eventname"] != 'null') {
                     document.getElementById("event-name").value = block_atrr["custom-eventname"];
@@ -156,12 +135,16 @@
                 }
 
             }
+            if ("custom-cycle" in block_atrr) {
+                document.getElementById("cycle-type").value = block_atrr["custom-cycle"];
+            }
 
 
             // 更新界面
             updateCalendar();
 
             // 自动更新结果
+            document.getElementById("cycle-type").addEventListener("change", updateCalendarAndSave);
             document.getElementById("target-date").addEventListener("change", updateCalendarAndSave);
             document.getElementById("event-name").addEventListener("input", updateCalendarAndSave);
             let selectColorInput = document.getElementById("selected-color");
