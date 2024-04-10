@@ -56,13 +56,14 @@ body {
     /* max-height: 100%; 限制最大高度，确保内容超出时可以滚动 */
     /* overflow-y: auto; 允许垂直滚动 */
 }
-
+#calendar-info{
+    background-color: #ffffff;
+}
 #count-info {
     /* 使用视口宽度的百分比作为字体大小 */
     font-size: 16vw;
     padding-top: 5vh;
     padding-bottom: 5vh;
-    background-color: #ffffff;
 }
 
 .settings-menu {
