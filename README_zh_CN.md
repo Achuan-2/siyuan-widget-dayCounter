@@ -33,7 +33,7 @@
     * 注：如果设置日期为当月的月末，则自动为每月月末，例如设置日期为2024年2月29日，则自动改为2024年4月30日；如果超过28号，经过几次更新会设置为月末，例如如果设置日期为2024年1月29日，到2024年的4月事件就变为了4月30日。
   * 周：指定每周几的事件
 * 支持设置背景色，进行一定美化
-* 配置支持自动保存到思源笔记的块属性，永久保留在笔记里
+* 支持配置自动保存到思源笔记的块属性，永久保留在笔记里
 * 支持导出模板后加载配置，方便重复调用特定倒数日/正数日
 
 
@@ -43,7 +43,7 @@
 
 ## ❤ 致谢
 
-* ChatGPT和Google Gemini：主体代码的编写
+* GPT 4：主体代码的编写
 * [Zuoqiu-Yingyi/widget-query](https://github.com/Zuoqiu-Yingyi/widget-query)：学习挂件加载设置默认宽度和高度
 * [OpaqueGlass/progressBarT-sywidget](https://github.com/OpaqueGlass/progressBarT-sywidget)：学习挂件如何保存和读取配置。
 
