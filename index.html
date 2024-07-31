@@ -95,7 +95,6 @@
         // 获取挂件ID
 
         const thisWidgetId = getCurrentWidgetId();
-
         window.onload = async function () {
             // 设置iframe样式
             if (window.frameElement.style.width === '') {
@@ -109,10 +108,13 @@
 
 
             //  获取块属性，进行挂件初始化
-            const response = await getBlockAttributesWithRetry(thisWidgetId);
+
+
+            const response = await getblockAttrAPI(thisWidgetId);
             // console.log(Object.keys(response.data).length);
-            let block_atrr = response.data;
+
             // console.log(block_atrr)
+            let block_atrr =response.data;
             if ("custom-selectedcolor" in block_atrr) {
                 document.getElementById("selected-color").value = block_atrr["custom-selectedcolor"];
             }

@@ -16,6 +16,7 @@ function updateCalendar() {
     }
 
     let currentDate = new Date();
+
     targetDate.setHours(8, 0, 0, 0);
     currentDate.setHours(8, 0, 0, 0); // 设置同一时间便于比较日期
     // 检查是否需要更新日期为最近的下一个周期
@@ -68,6 +69,7 @@ function updateCalendar() {
     // 设置背景色
     document.getElementById('calendar-top').style = `background-color: ${backgroundColor};`;
     hexColorInput.value = backgroundColor;
+
 }
 // 检测日期是否是月末
 function isEndOfMonth(date) {

@@ -1,3 +1,6 @@
+## v0.0.7 / 2024.07.31
+- 🐛 修复不能加载插件的问题：getBlockAttributesWithRetry改为getblockAttrAPI
+
 ## v0.0.6 / 2024.04.10
 - ✨ 更换icon
 

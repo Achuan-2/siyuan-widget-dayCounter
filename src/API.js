@@ -4,7 +4,7 @@ let includeOs = []; //目前没用
 
 
 
-export  async function getBlockAttributesWithRetry(widgetId, maxRetries = 4, interval = 500) {
+export  async function getBlockAttributesWithRetry(widgetId, maxRetries = 5, interval = 500) {
     // 尝试获取块属性
     let response = await getblockAttrAPI(widgetId);
 
