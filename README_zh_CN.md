@@ -51,4 +51,4 @@
 
 欢迎在[Github](https://github.com/Achuan-2/siyuan-widget-dayCounter)提issue或是通过邮箱联系我
 
-如果你喜欢这个挂件，欢迎在[爱发电](https://afdian.net/a/achuan-2)给我买包辣条，这会激励我更新和完善挂件
+如果你喜欢这个挂件，欢迎在[我的语雀主页](https://www.yuque.com/achuan-2)给我买包辣条，这会激励我更新和完善挂件
